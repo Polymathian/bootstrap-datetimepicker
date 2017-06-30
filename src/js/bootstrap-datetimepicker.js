@@ -912,6 +912,10 @@
              * Hides the widget. Possibly will emit dp.hide
              */
             hide = function () {
+                input.off({
+                    'keydown': keydown,
+                    'keyup': keyup
+                });
                 var transitioning = false;
                 if (!widget) {
                     return picker;
@@ -1201,6 +1205,10 @@
              * Shows the widget. Possibly will emit dp.show and dp.change
              */
             show = function () {
+                input.on({
+                    'keydown': keydown,
+                    'keyup': keyup
+                });
                 var currentMoment,
                     useCurrentGranularity = {
                         'year': function (m) {
@@ -1336,8 +1344,6 @@
                 input.on({
                     'change': change,
                     'blur': options.debug ? '' : hide,
-                    'keydown': keydown,
-                    'keyup': keyup,
                     'focus': options.allowInputToggle ? show : ''
                 });
 
